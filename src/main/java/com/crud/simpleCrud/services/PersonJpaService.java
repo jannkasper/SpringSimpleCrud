@@ -2,11 +2,13 @@ package com.crud.simpleCrud.services;
 
 import com.crud.simpleCrud.entities.PersonEntity;
 import com.crud.simpleCrud.repositories.PersonRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class PersonJpaService implements CrudService <PersonEntity,Long> {
+@Service
+public class PersonJpaService implements PersonService {
     private final PersonRepository personRepository;
 
     public PersonJpaService(PersonRepository personRepository) {
