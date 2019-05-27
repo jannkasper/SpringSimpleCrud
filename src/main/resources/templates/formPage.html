@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
@@ -17,11 +17,11 @@
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<!--/*@thymesVar id="person" type="com.crud.simpleCrud.entities.PersonEntity"*/-->
+<!--/*@thymesVar id="personEntity" type="com.crud.simpleCrud.entities.PersonEntity"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form  th:object="${person}" th:action="@{/create}" method="post">
+            <form  th:object="${personEntity}" action="#" th:action="@{/create}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
@@ -32,32 +32,23 @@
 
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>First Name:</label>
-                                    <input type="text" class="form-control" th:field="*{firstName}"/>
+                                    <label>Name:</label>
+                                    <input type="text" class="form-control" th:field="*{name}"/>
+                                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Last Name:</label>
-                                    <input type="text" class="form-control" th:field="*{lastName}"/>
+                                    <label>Email:</label>
+                                    <input type="text" class="form-control" th:field="*{email}"/>
+                                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Address:</label>
-                                    <input type="text" class="form-control" th:field="*{address}"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>City:</label>
-                                    <input type="text" class="form-control" th:field="*{city}"/>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>Phone number:</label>
-                                    <input type="text" class="form-control" th:field="*{telephone}"/>
+                                    <label>Age:</label>
+                                    <input type="text" class="form-control" th:field="*{age}"/>
+                                    <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</p>
                                 </div>
                             </div>
 
@@ -66,7 +57,7 @@
 
 
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" value="Create" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

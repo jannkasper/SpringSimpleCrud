@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Our vets</title>
+    <title>mainPage</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -21,12 +21,12 @@
 <!--/*@thymesVar id="person" type="com.crud.simpleCrud.entities.PersonEntity"*/-->
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
-        <a href="/owner/new" class="btn btn-primary btn-md" role="button">Create Owner</a>
+        <a href="/create" class="btn btn-primary btn-md" role="button">Create New</a>
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">List of owners</h1>
+                    <h1 class="panel-title">List</h1>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive" th:if="${not #lists.isEmpty(people)}">

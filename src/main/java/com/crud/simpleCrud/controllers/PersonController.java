@@ -2,6 +2,7 @@ package com.crud.simpleCrud.controllers;
 
 import com.crud.simpleCrud.entities.PersonEntity;
 import com.crud.simpleCrud.services.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,11 +16,8 @@ import java.util.Map;
 
 @Controller
 public class PersonController {
+    @Autowired
     private PersonService personService;
-
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     @RequestMapping("/")
     public String showMainPage(Model model) {
@@ -42,13 +40,13 @@ public class PersonController {
     @GetMapping({"/create"})
     public String initCreate(Map<String,Object> model) {
         PersonEntity personEntity = new PersonEntity();
-        model.put("person", personEntity);
+        model.put("personEntity", personEntity);
         return "formPage";
     }
     @PostMapping({"/create"})
-    public String processCreate(@Valid PersonEntity personEntity,Model model, BindingResult result) {
-        if (result.hasErrors()) {
-            model.addAttribute("person",personEntity);
+    public String processCreate(@Valid PersonEntity personEntity, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("personEntity",personEntity);
             return "formPage";
         } else {
             this.personService.save(personEntity);
@@ -59,13 +57,13 @@ public class PersonController {
     @GetMapping({"/edit/{id}"})
     public String initEdit(@PathVariable("id") Long id, Model model) {
         PersonEntity personEntity = this.personService.findById(id);
-        model.addAttribute("person",personEntity);
+        model.addAttribute("personEntity",personEntity);
         return "formPage";
     }
     @PostMapping({"/edit/{id}"})
-    public String processEdit(@Valid PersonEntity personEntity, @PathVariable("id") Long id,Model model, BindingResult result) {
-        if (result.hasErrors()) {
-            model.addAttribute("person",personEntity);
+    public String processEdit(@Valid PersonEntity personEntity, BindingResult bindingResult, @PathVariable("id") Long id,Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("personEntity",personEntity);
             return "formPage";
         } else {
             personEntity.setId(Long.valueOf(id));
