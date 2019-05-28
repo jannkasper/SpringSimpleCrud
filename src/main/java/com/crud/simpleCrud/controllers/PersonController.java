@@ -25,15 +25,15 @@ public class PersonController {
         return "mainPage";
     }
 
-    @RequestMapping({"/edit/{id}"})
-    public String editPerson (@PathVariable("id") Long id) {
-        return "formPage";
-    }
+//    @RequestMapping({"/edit/{id}"})
+//    public String editPerson (@PathVariable("id") String id) {
+//        return "formPage";
+//    }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deletePerson(@PathVariable long id, Model model) {
+    public String deletePerson(@PathVariable String id, Model model) {
 
-        personService.deleteById(id);
+        personService.deleteById(Long.parseLong(id));
         model.addAttribute("people", personService.findAll());
         return "redirect:/";
     }
@@ -55,13 +55,14 @@ public class PersonController {
         }
     }
     @GetMapping({"/edit/{id}"})
-    public String initEdit(@PathVariable("id") Long id, Model model) {
-        PersonEntity personEntity = this.personService.findById(id);
+    public String initEdit(@PathVariable("id") String id, Model model) {
+        PersonEntity personEntity = this.personService.findById(Long.parseLong(id));
         model.addAttribute("personEntity",personEntity);
         return "formPage";
     }
     @PostMapping({"/edit/{id}"})
-    public String processEdit(@Valid PersonEntity personEntity, BindingResult bindingResult, @PathVariable("id") Long id,Model model) {
+    public String processEdit(@Valid PersonEntity personEntity, BindingResult bindingResult,
+                              @PathVariable("id") String id,Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("personEntity",personEntity);
             return "formPage";
